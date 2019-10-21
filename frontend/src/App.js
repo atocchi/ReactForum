@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import styled from 'styled-components';
-
+import PostForm from './components/PostForm';
 import forumLogo from './img/forum-logo.png';
-const fireDB = require('firebase');
+
 
 
 
@@ -70,7 +70,7 @@ class App extends Component {
   };
 
 
-  componentWillMount(){
+  componentDidMount(){
     fetch("http://localhost:8080/api/main")
     .then((res) => {
       return res.json()
@@ -85,16 +85,16 @@ class App extends Component {
 
 
 
-  handleSubmit = (event) => {
+  // handleSubmit = (event) => {
     
-    const form = event.target
-    const data = new FormData(form);
+  //   const form = event.target
+  //   const data = new FormData(form);
   
-    fetch('http://localhost:8080/api/main', {
-      method: "POST",
-      body: data
-    })
-  }
+  //   fetch('http://localhost:8080/api/main', {
+  //     method: "POST",
+  //     body: data
+  //   })
+  // }
 
 
   render(){
@@ -114,16 +114,18 @@ class App extends Component {
             <Container padding="0px" gridTemplateRows="auto auto" gridGap="20px">
               <Card width="100%" height="200px" gridTemplateColumns="1fr" gridTemplateRows="1fr 1fr" padding="10px">
                 <Title padding="20px">Post to our Forum!</Title>
-                <form onSubmit={this.handleSubmit}>
-        <label htmlFor="name">Name</label>
+                {/* <form onSubmit={this.handleSubmit}> */}
+
+        <PostForm/>
+        {/* <label htmlFor="name">Name</label>
         <input id="name" name="name" type="text" placeholder="Name"/>
 
         <label htmlFor="post">Post</label>
-        <input id="post" name="post" type="post" placeholder="Post"/>
+        <input id="post" name="post" type="post" placeholder="Post"/> */}
 
-        <Button>Submit</Button>
-      </form>
-                
+        {/* <Button>Submit</Button> */}
+      {/* </form>
+                 */}
     </Card>
               
      </Container>

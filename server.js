@@ -10,7 +10,8 @@ let arr = [];
 
 //pusher function, allows callbacks
 function pusher(x) {
-    arr.push(x)
+    arr.push(x);
+    rArr = arr.reverse();
 };
 
 
@@ -24,6 +25,9 @@ function pusher(x) {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//use cors
+app.use(cors());
+
 
 fireDB.selectAll(function (data) {
     pusher(data)
@@ -35,12 +39,14 @@ fireDB.selectAll(function (data) {
 
 app.get("/api/main", cors(), function (req, res) {
     res.json({
-        "posts": arr.reverse()
+        "posts": rArr
     });
 });
 
-app.post("/api/main", cors(), function (req, res) {
+app.post("/api/main", function (req, res) {
+    console.log("Hey a Post!")
     var newPost = req.body;
+    console.log(req.body)
     fireDB.pusher(newPost);
     res.json(arr);
 });
